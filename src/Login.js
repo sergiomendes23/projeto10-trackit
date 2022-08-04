@@ -1,17 +1,47 @@
 import Styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Login(){
+
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    function sendForm(e) {
+        e.preventDefault();
+    }
+    const body = {
+        email,
+        senha,
+    };
+
+    const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body);
+    
+    promise.then(res => {console.log(res.data)});
+
     return(
-        <Container>
-            <Logo>
-                <img src="./img/Trackit.png" />
-            </Logo>
-            <Email placeholder="email"></Email>
-            <Password placeholder="senha"></Password>
-            <Enter >Entrar</Enter>
-            <Sign to="/SignUp">Não tem uma conta? Cadastre-se!</Sign>
-        </Container>
+        <form onSubmit={sendForm}>
+            <Container>
+                <Logo>
+                    <img src="./img/Trackit.png" />
+                </Logo>
+                <Email type="email"
+                    placeholder="email" 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    value={email}
+                    required>                    
+                </Email>
+                <Password type="password"
+                    placeholder="senha" 
+                    onChange={(e) => setSenha(e.target.value)} 
+                    value={senha}
+                    required>                    
+                </Password>
+                <Enter >Entrar</Enter>
+                <Sign to="/SignUp">Não tem uma conta? Cadastre-se!</Sign>
+            </Container>
+        </form>
     )
 }
 
@@ -83,6 +113,7 @@ const Enter = Styled.button`
     border: none;
     border-radius: 5px;
     margin-bottom: 15px;
+    cursor: pointer;
 `
 const Sign = Styled(Link)`
     font-family: 'Lexend';

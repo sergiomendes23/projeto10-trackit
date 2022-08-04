@@ -21,6 +21,7 @@ const Topo = Styled.div`
     justify-content: space-between;
     box-sizing: border-box;
     padding: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
     & div {
         width: 50px;

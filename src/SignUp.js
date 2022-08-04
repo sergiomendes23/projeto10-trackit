@@ -1,19 +1,69 @@
 import Styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function SignUp() {
-    return(
-        <Container>
-            <Logo>
-                <img src="./img/Trackit.png" />
-            </Logo>
-            <Email placeholder="email"></Email>
-            <Password placeholder="senha"></Password>
-            <Name placeholder="nome"></Name>
-            <Picture placeholder="foto"></Picture>
-            <Cadastro >Cadastrar</Cadastro>
-            <LogOn to="/Header">Já tem uma conta? Faça login!</LogOn>
-        </Container>
+
+    const Navigate = useNavigate()
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [nome, setNome] = useState('');
+    const [foto, setFoto] = useState('');
+
+    const body = {
+        email,
+        senha,
+        nome,
+        foto,
+    };
+    
+    const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', body);
+    
+    promise.then((res) => {
+        console.log(res.data)
+        Navigate("/")
+    })    
+    
+    function handleForm(e) {
+        e.preventDefault();
+        console.log('entrei')   
+    };
+    
+    return (
+        <form>
+            <Container>
+                <Logo>
+                    <img src="./img/Trackit.png" />
+                </Logo>
+                <Email type="email"
+                    placeholder="email" 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    value={email}
+                    required>                    
+                </Email>
+                <Password type="password"
+                    placeholder="senha" 
+                    onChange={(e) => setSenha(e.target.value)} 
+                    value={senha}
+                    required> 
+                </Password>
+                <Name type="text"
+                    placeholder="nome" 
+                    onChange={(e) => setNome(e.target.value)} 
+                    value={nome}
+                    required>   
+                </Name>
+                <Picture type="url"
+                    placeholder="foto" 
+                    onChange={(e) => setFoto(e.target.value)} 
+                    value={foto}
+                    required>   
+                </Picture>
+                <Cadastro onClick={handleForm()}>Cadastrar</Cadastro>
+                <LogOn to="/Header">Já tem uma conta? Faça login!</LogOn>
+            </Container>
+        </form>
     )
 }
 
@@ -129,6 +179,7 @@ const Cadastro = Styled.button`
     border: none;
     border-radius: 5px;
     margin-bottom: 15px;
+    cursor: pointer;
 `
 const LogOn = Styled(Link)`
     font-family: 'Lexend';
