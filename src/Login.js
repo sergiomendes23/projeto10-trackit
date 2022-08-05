@@ -6,22 +6,26 @@ import axios from "axios";
 export default function Login(){
 
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
     function sendForm(e) {
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body);
+        
+        promise.then(res => {console.log(res.data)});
+
+        promise.catch((err) => {
+            alert('Preencha os campos novamente!')
+        })   
         e.preventDefault();
     }
     const body = {
         email,
-        senha,
+        password,
     };
 
-    const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body);
-    
-    promise.then(res => {console.log(res.data)});
 
     return(
-        <form onSubmit={sendForm}>
+        <form>
             <Container>
                 <Logo>
                     <img src="./img/Trackit.png" />
@@ -34,11 +38,13 @@ export default function Login(){
                 </Email>
                 <Password type="password"
                     placeholder="senha" 
-                    onChange={(e) => setSenha(e.target.value)} 
-                    value={senha}
+                    onChange={(e) => setPassword(e.target.value)} 
+                    value={password}
                     required>                    
                 </Password>
-                <Enter >Entrar</Enter>
+                <Enter onClick={sendForm}>
+                    <Go to="/Today" style={{textDecoration: 'none'}}>Entrar</Go>
+                </Enter>                
                 <Sign to="/SignUp">Não tem uma conta? Cadastre-se!</Sign>
             </Container>
         </form>
@@ -105,6 +111,9 @@ const Password = Styled.input`
 const Enter = Styled.button`
     width: 303px;
     height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #52B6FF;
     font-family: 'Lexend';
     font-weight: 400;
@@ -114,6 +123,9 @@ const Enter = Styled.button`
     border-radius: 5px;
     margin-bottom: 15px;
     cursor: pointer;
+`
+const Go = Styled(Link)`
+    color: #ffffff;
 `
 const Sign = Styled(Link)`
     font-family: 'Lexend';

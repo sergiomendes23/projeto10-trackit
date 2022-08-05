@@ -7,27 +7,30 @@ export default function SignUp() {
 
     const Navigate = useNavigate()
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [nome, setNome] = useState('');
-    const [foto, setFoto] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
 
     const body = {
         email,
-        senha,
-        nome,
-        foto,
+        password,
+        name,
+        image,
     };
     
-    const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', body);
-    
-    promise.then((res) => {
-        console.log(res.data)
-        Navigate("/")
-    })    
-    
     function handleForm(e) {
+        
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', body);
+        
+        promise.then((res) => {
+            console.log(res.data)
+            Navigate("/")
+        }) 
+        promise.catch((err) => {
+            alert('Preencha os campos novamente!')
+        })   
         e.preventDefault();
-        console.log('entrei')   
+        
     };
     
     return (
@@ -44,23 +47,23 @@ export default function SignUp() {
                 </Email>
                 <Password type="password"
                     placeholder="senha" 
-                    onChange={(e) => setSenha(e.target.value)} 
-                    value={senha}
+                    onChange={(e) => setPassword(e.target.value)} 
+                    value={password}
                     required> 
                 </Password>
                 <Name type="text"
                     placeholder="nome" 
-                    onChange={(e) => setNome(e.target.value)} 
-                    value={nome}
+                    onChange={(e) => setName(e.target.value)} 
+                    value={name}
                     required>   
                 </Name>
                 <Picture type="url"
                     placeholder="foto" 
-                    onChange={(e) => setFoto(e.target.value)} 
-                    value={foto}
+                    onChange={(e) => setImage(e.target.value)} 
+                    value={image}
                     required>   
                 </Picture>
-                <Cadastro onClick={handleForm()}>Cadastrar</Cadastro>
+                <Cadastro onClick={handleForm}>Cadastrar</Cadastro>
                 <LogOn to="/Header">Já tem uma conta? Faça login!</LogOn>
             </Container>
         </form>
