@@ -6,6 +6,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Habits from "./Habits";
 import Today from "./Today";
+import History from "./History";
 
 import TokenContext from "./Context/TokenContext.js";
 
@@ -29,6 +30,7 @@ export default function App(){
                     <Route path="/SignUp" element={<SignUp />} />
                     <Route path="/Habits" element={<Habits />} />
                     <Route path="/Today" element={<Today />} />
+                    <Route path="/History" element={<History />} />
                    
                     
                 </Routes>

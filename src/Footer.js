@@ -1,11 +1,12 @@
 import Styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Footer(){
     return (
         <Container>
             <Options>
-                <p>Hábitos</p>
-                <p>Histórico</p>
+                <Link to="/Habits" style={{textDecoration: 'none', color: "#52B6FF", cursor: "pointer"}}><p>Hábitos</p></Link>
+                <Link to="/History" style={{textDecoration: 'none', color: "#52B6FF", cursor: "pointer"}}><p>Histórico</p></Link>
             </Options>
         </Container>
     )
@@ -33,5 +34,6 @@ const Options = Styled.div`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    
+    
 `

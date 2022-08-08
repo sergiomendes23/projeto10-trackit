@@ -1,19 +1,17 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export default function Today(){
 
-    function habitDays(){
-        
-    }
     return (
         <Container>
             <Header />
             <Menu>
                 <Plus>Meus Hábitos</Plus>
-                <Icon onClick={habitDays}>                    
+                <Icon to="/Habits"  style={{textDecoration: 'none'}}>                    
                     +
                 </Icon>
             </Menu>
@@ -47,7 +45,7 @@ const Plus = Styled.h1`
     font-size: 23px;
     color: #126BA5;
 `
-const Icon = Styled.button`
+const Icon = Styled(Link)`
     width: 40px;
     height: 40px;
     display: flex;

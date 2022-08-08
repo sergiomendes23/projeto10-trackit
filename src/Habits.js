@@ -14,16 +14,16 @@ export default function Habits(){
     const [habit, setHabit] = useState("");
     const {token, userHabits, setUserHabits} = useContext(TokenContext);
 
-    useEffect(getHabits, []); 
+    useEffect(getHabits, []);
 
     const allDays = [
-        {id: 0, name:"D", isSelected: false}, 
-        {id: 1, name:"S", isSelected: false}, 
-        {id: 2, name:"T", isSelected: false}, 
-        {id: 3, name:"Q", isSelected: false}, 
-        {id: 4, name:"Q", isSelected: false}, 
-        {id: 5, name:"S", isSelected: false}, 
-        {id: 6, name:"S", isSelected: false}
+        {id: 0, name:"D", isSelected: false},
+        {id: 1, name:"S", isSelected: false},
+        {id: 2, name:"T", isSelected: false},
+        {id: 3, name:"Q", isSelected: false},
+        {id: 4, name:"Q", isSelected: false},
+        {id: 5, name:"S", isSelected: false},
+        {id: 6, name:"S", isSelected: false},
     ];
 
     const [selectedDay, setSelectedDay] = useState(allDays);
@@ -31,10 +31,11 @@ export default function Habits(){
     function selectDay(id){
         const selectedDays = selectedDay.map((day) => {
             if(day.id === id){
-                day.isSelectad = !day.isSelected
+                day.isSelected = !day.isSelected
             }
-            return day
+            return (day)
         })
+
         setSelectedDay([...selectedDays])
 
         const daysTrue = selectedDay.filter((day) => day.isSelected === true);
@@ -61,7 +62,7 @@ export default function Habits(){
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', body, config)
 
-            promise.then(response => {
+            promise.then(() => {
                 setHabit("");
                 setDay([]);
                 setSelectedDay(allDays);
@@ -216,8 +217,8 @@ const TextHabit = Styled.input`
 const Days = Styled.button`
     width: 30px;
     height: 30px;
-    color: ${props => props.selected ? "#FFFFFF" : "#DBDBDB"};
-    background-color: ${props => props.selected ? "#DBDBDB" : "#FFFFFF"};
+    color: ${props => props.selected ? "#FFFFFF" : "#CFCFCF;"};
+    background-color: ${props => props.selected ? "#CFCFCF;" : "#FFFFFF"};
     border: 1px solid #D5D5D5;
     border-radius: 5px;
     margin-left: 4px;
@@ -228,6 +229,7 @@ const Days = Styled.button`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
+    cursor: pointer;
 `
 const DivDays = Styled.div`
     position: absolute;
@@ -260,6 +262,7 @@ const Save = Styled.button`
     font-size: 16px;
     line-height: 20px;
     color: #FFFFFF;
+    cursor: pointer;
 `
 const Cancel = Styled.button`
     width: 84px;
@@ -273,6 +276,7 @@ const Cancel = Styled.button`
     font-size: 16px;
     line-height: 20px;
     color: #52B6FF;
+    cursor: pointer;
 `
 const NewTask = Styled.div`
 
