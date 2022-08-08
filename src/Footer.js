@@ -15,6 +15,9 @@ const Container = Styled.div`
     width: 100%;
     height: 70px;
     background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 `
 const Options = Styled.div`
     display: flex;
