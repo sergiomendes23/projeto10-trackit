@@ -2,8 +2,12 @@ import Styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import TokenContext from "./Context/TokenContext";
 
 export default function Login(){
+
+    const {setImage, setToken} = useContext(TokenContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,7 +15,9 @@ export default function Login(){
     function sendForm(e) {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body);
         
-        promise.then(res => {console.log(res.data)});
+        promise.then(res => {
+            setImage(res.data.image)
+            setToken(res.data.Token)});
 
         promise.catch((err) => {
             alert('Preencha os campos novamente!')

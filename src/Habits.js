@@ -122,7 +122,7 @@ export default function Habits(){
                             </Tasks>
                 :   
                 ""
-                }            
+                }                         
                 <MyHabits>
                     <p>Você não tem hábito cadastrado ainda. Adicione um hábito para começar a trackear.</p>
                 </MyHabits>                
